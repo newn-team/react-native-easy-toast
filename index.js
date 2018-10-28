@@ -102,11 +102,10 @@ export default class Toast extends Component {
 
         const view = this.state.isShow ?
             <View
-                style={[styles.container, { top: pos }]}
-                pointerEvents="none"
+                style={[styles.container, { backgroundColor: this.props.containerBackgroundColor }]}
             >
                 <Animated.View
-                    style={[styles.content, { opacity: this.state.opacityValue }, this.props.style]}
+                    style={[styles.content, { opacity: this.state.opacityValue, top: pos }, this.props.style]}
                 >
                     {React.isValidElement(this.state.text) ? this.state.text : <Text style={this.props.textStyle}>{this.state.text}</Text>}
                 </Animated.View>
@@ -118,6 +117,8 @@ export default class Toast extends Component {
 const styles = StyleSheet.create({
     container: {
         position: 'absolute',
+        top: 0,
+        bottom: 0,
         left: 0,
         right: 0,
         elevation: 999,
@@ -145,7 +146,8 @@ Toast.propTypes = {
     positionValue:PropTypes.number,
     fadeInDuration:PropTypes.number,
     fadeOutDuration:PropTypes.number,
-    opacity:PropTypes.number
+    opacity:PropTypes.number,
+    containerBackgroundColor: PropTypes.string,
 }
 
 Toast.defaultProps = {
@@ -154,5 +156,6 @@ Toast.defaultProps = {
     positionValue: 120,
     fadeInDuration: 500,
     fadeOutDuration: 500,
-    opacity: 1
+    opacity: 1,
+    containerBackgroundColor: 'transparent',
 }
